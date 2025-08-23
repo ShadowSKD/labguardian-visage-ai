@@ -1,11 +1,13 @@
-# **LabVisage Documentation**
+# **LabGuardian VisageAI Documentation**
 
 ## **Overview**
 
-LabVisage is a secure and scalable exam monitoring system designed to maintain academic integrity during online lab-based examinations. It provides real-time monitoring of client activities, malpractice detection, and centralized oversight for administrators.
+LabGuardian VisageAI (LabVisageAI) is a secure and scalable exam monitoring system designed to maintain academic integrity during online lab-based examinations. It provides real-time monitoring of client activities, malpractice detection, and centralized oversight for administrators using AI functionality.
+
+Currently Under Development. Suggested to use our Original Application [LabGuardian Visage](https://github.com/ShadowSKD/labguardian-visage-ai) for now.
 
 ---
-
+<!-- 
 ## **Features**
 
 1. **Real-Time Monitoring**: Track all student activity during exams.
@@ -315,9 +317,8 @@ services:
 | Srinidhi Chappar  | Client Monitoring System      |
 | Suraj Kr Das      | Backend API Development       |
 
-
 ---
 
 ## **License**
 
-This project was developed as part of a college assignment and is intended solely for educational and academic purposes. The implementation is based on research into existing technologies and their documentation. While we have strived to create a functional system, it is understood that the codebase may incorporate concepts and code patterns that are present in the broader technological landscape. No claims of original intellectual property are made on these pre-existing elements.
+This project was developed as part of a college assignment and is intended solely for educational and academic purposes. The implementation is based on research into existing technologies and their documentation. While we have strived to create a functional system, it is understood that the codebase may incorporate concepts and code patterns that are present in the broader technological landscape. No claims of original intellectual property are made on these pre-existing elements. -->
