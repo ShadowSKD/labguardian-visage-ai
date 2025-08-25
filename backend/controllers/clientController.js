@@ -3,7 +3,7 @@ const { createAlert, getAlerts, startExam, endExam } = require('../services/aler
 const User = require('../models/userModel');
 const Lab = require('../models/labModel');
 const { startInactivityMonitor } = require("../services/heartbeatService");
-
+const genai = require('../services/genai');
 
 // Function to generate a unique client ID based on the lab code and client name
 const generateClientID = (clientName, labCode) => {
@@ -75,8 +75,9 @@ exports.endExam = async (req, res) => {
     const lab = await Lab.updateOne({labCode},{$set:{labLock:false}});
 
     endExam(labCode); 
-    res.status(200).json({ message: 'Exam ended successfully', logFile });
-    
+    genai(`Generate a concise summary of the following exam log in less than 50 words: ${logFile}`).then((summary) => {
+        res.status(200).json({ message: 'Exam ended successfully', logFile, summary });
+    });
 }
 
 exports.registerClient = (req, res) => {
