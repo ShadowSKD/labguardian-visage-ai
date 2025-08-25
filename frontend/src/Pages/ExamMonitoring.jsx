@@ -99,7 +99,12 @@ export default function ExamMonitoring() {
             ...prev,
             isLocked: false,
           }));
-          navigate('/user'); // Redirect to /user route
+          AIMessageBox({
+            labCode,
+            log_file: response.data.logFile,
+            message: response.data.summary
+          });
+          
         } else {
           console.error('Failed to Stop Exam');
         }

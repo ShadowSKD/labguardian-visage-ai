@@ -1,10 +1,17 @@
 const Lab = require('../models/labModel');
 const User = require('../models/userModel');
+const genai = require('../services/genai');
 
 // Add a new lab
 exports.addLab = async (req, res) => {
   const { labCode, labName, labDescription, labClientsCount, labLock } = req.body;
-
+  let labPrompt = '';
+  try {
+    labPrompt = await genai(`Generate a prompt for this lab similar to this format:"Is the following application a web browser, communication tool, or any app unsuitable for a restricted lab exam environment? Answer only with 'Yes' or 'No'.". Lab name: ${labName}, Lab description: ${labDescription}.`);
+  } catch (e) {
+    console.error("Error generating lab prompt:", e);
+    return res.status(500).json({ error: 'Failed to generate lab prompt' });
+  }
   try {
     const newLab = new Lab({
       labCode,
@@ -12,6 +19,7 @@ exports.addLab = async (req, res) => {
       labDescription,
       labClientsCount,
       labLock,
+      labPrompt
     });
 
     await newLab.save();
