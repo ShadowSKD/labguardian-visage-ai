@@ -11,4 +11,4 @@ frontend/.env.tmp
 # Common ignores
 **/node_modules/
 **/dist/
-.env
+**/.env
