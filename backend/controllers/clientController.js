@@ -80,7 +80,7 @@ exports.endExam = async (req, res) => {
     });
 }
 
-exports.registerClient = (req, res) => {
+exports.registerClient = async (req, res) => {
     const { clientName, labCode } = req.body;
 
     if (!clientName || !labCode) {
@@ -112,11 +112,19 @@ exports.registerClient = (req, res) => {
         lastHeartbeat: Date.now(),
         status: 'active'
     }
-
+    // Fetch labPrompt from Lab using labCode
+    let labPrompt = "";
+    try {
+        const lab = await Lab.findOne({ labCode });
+        labPrompt = lab && lab.labPrompt ? lab.labPrompt : "";
+    } catch (err) {
+        // If error occurs, just leave labPrompt as empty string
+    }
+    newClient.labPrompt = labPrompt;
     // Store the client in the database or in-memory store
     try {
         addClient(newClient);
-        res.status(201).json({ message: 'Client registered successfully', clientId });
+        res.status(201).json({ message: 'Client registered successfully', clientId, labPrompt });
     } catch (error) {
         res.status(500).json({ message: 'Error registering client', error: error.message });
     }
