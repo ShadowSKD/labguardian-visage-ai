@@ -22,6 +22,8 @@ const generateExamLog = (alertObj) => {
 exports.createExam = async (req,res) => {
     const { examName, labCode, UserID } = req.body;
 
+    console.log('Called by:', UserID, labCode);
+
     if (!examName || !labCode || !UserID) {
         return res.status(400).json({ message: 'Exam name and lab code are required' });
     }
@@ -71,11 +73,16 @@ exports.endExam = async (req, res) => {
     }
 
     const alertObj = getAlerts(labCode)
+    for (const alert of alertObj.log) {
+        let clientID = alert.client;
+        const client = getClient(clientID);
+        alert.client = client.clientName;
+    }
     const logFile = generateExamLog(alertObj)
     const lab = await Lab.updateOne({labCode},{$set:{labLock:false}});
 
     endExam(labCode); 
-    genai(`Generate a concise summary of the following exam log in less than 50 words: ${logFile}`).then((summary) => {
+    genai(`Generate a concise summary of the following exam log in less than 50 words with the following Log file (Format:{client: '',alertMsg,alertType,alertTS}, client here is the Client that did malpractices) : ${logFile}`).then((summary) => {
         res.status(200).json({ message: 'Exam ended successfully', logFile, summary });
     });
 }

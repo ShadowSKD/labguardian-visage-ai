@@ -23,7 +23,7 @@ log = {
 
 const alertLog = new Map();
 
-const { removeClients  } = require("../services/clientStore");
+const { removeClients } = require("../services/clientStore");
 
 
 /**

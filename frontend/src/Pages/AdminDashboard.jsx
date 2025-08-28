@@ -74,6 +74,7 @@ export default function AdminDashboard() {
             Admin Dashboard
           </h1>
           <p className="text-gray-600">Manage users and labs for the exam monitoring system</p>
+          <p className="text-gray-600">Want to run exam? Go to user dashboard: <Link to="/user" className="text-blue-600 hover:underline">User Dashboard</Link></p>
         </div>
 
         {/* Manage Users Section */}

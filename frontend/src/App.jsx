@@ -15,6 +15,7 @@ import EditUser from './Pages/EditUser'
 import EditLab from './Pages/EditLab'
 import About from './Pages/About'
 import ErrorPage from './Pages/ErrorPage'
+import ExamAnalysis from './Pages/ExamAnalysis'
 
 function App() {
   // console.log('App api url: ', process.env.REACT_APP_API_URL)
@@ -40,6 +41,8 @@ function App() {
           <Route index element={<UserDashboard />} />
         </Route>
         <Route path="user/exam/:labCode" element={<ProtectedRoute><ExamMonitoring /></ProtectedRoute>} />
+        
+        <Route path="user/exam/analysis/:labCode" element={<ProtectedRoute><ExamAnalysis /></ProtectedRoute>} />
 
         <Route path="*" element={<ErrorPage code={404} message="Page Not Found" />} />
       </Routes>

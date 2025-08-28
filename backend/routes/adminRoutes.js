@@ -7,11 +7,13 @@ const {
     deleteUser,
     editLab,
     getLab,
-    forceLabReset
+    forceLabReset,
+    resetlabAll
 } = require('../controllers/adminController');
 const { isLogin, isAdmin } = require('../middleware/auth_middleware');
 const { editUser } = require('../controllers/userController');
 const router = express.Router();
+
 
 // Add a new lab
 router.post('/labs', isLogin, isAdmin, addLab);

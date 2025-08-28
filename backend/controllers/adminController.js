@@ -128,3 +128,12 @@ exports.forceLabReset = async (req, res) => {
   }
   res.status(200).json({ message: 'Lab reset successfully' });
 }
+
+exports.resetlabAll = async (req,res) => {
+  try {
+    await Lab.updateMany({}, { $set: { labLock: false, labClientsCount: 0 } });
+    res.status(200).json({ message: 'All labs reset successfully' });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+}
